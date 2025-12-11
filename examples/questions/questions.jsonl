@@ -1,0 +1,6 @@
+{"id": "1","question":  "Given an RGB hex value of #FF0000, tell me the corresponding name of the colour. Just state the colour name with no extraneous text.","answer": "Red"}
+{"id": "2","question":  "Given an RGB hex value of #FFA500, tell me the corresponding name of the colour. Just state the colour name with no extraneous text.","answer": "Orange"}
+{"id": "3","question":  "Given an RGB hex value of #FFFF00, tell me the corresponding name of the colour. Just state the colour name with no extraneous text.","answer": "Yellow"}
+{"id": "4","question":  "Given an RGB hex value of #00FF00, tell me the corresponding name of the colour. Just state the colour name with no extraneous text.","answer": "Green"}
+{"id": "5","question":  "Given an RGB hex value of #0000FF, tell me the corresponding name of the colour. Just state the colour name with no extraneous text.","answer": "Blue"}
+{"id": "6","question":  "Given an RGB hex value of #8F00FF, tell me the corresponding name of the colour. Just state the colour name with no extraneous text.","answer": "Violet"}

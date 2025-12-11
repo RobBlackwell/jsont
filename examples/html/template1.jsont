@@ -1,0 +1,1 @@
+<p style="color:{line['hex']};">{line['name']}</p>

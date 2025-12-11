@@ -1,0 +1,4 @@
+{{"id": "{line_number}",
+"question":  "Given an RGB hex value of {line['hex']}, tell me the corresponding name of the colour. Just state the colour name with no extraneous text.",
+"answer": {json.dumps(line['name'])}
+}}
