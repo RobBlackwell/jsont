@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
+from pathlib import Path
 import argparse
-import json
 import datetime
 import json
-from pathlib import Path
+import json
+import sys
 
 
 def escape(s):
@@ -28,6 +29,11 @@ def main():
         action="store_true",
         help="Escape strings from the JSONL (useful for JSONL).",
     )
+    parser.add_argument(
+        "--ignore-errors",
+        action="store_true",
+        help="Ignore lines with errors and continue processing.",
+    )
 
     args = parser.parse_args()
 
@@ -42,28 +48,37 @@ def main():
     # Process each line in the JSONL file
     with open(args.jsonl_file, "r") as file:
         for line in file:
-            # Convert JSON line to dictionary
-            data = json.loads(line.strip())
 
             line_number += 1
 
-            # Create a safe environment containing the data
-            safe_env = {
-                "line": data,
-                "line_number": line_number,
-                "json": json,
-                "Path": Path,
-                "str": str,
-                "escape": escape,
-            }
+            try:
+                # Convert JSON line to dictionary
+                data = json.loads(line.strip())
 
-            # Use eval to interpret the string as an f-string dynamically
-            formatted_string = eval(
-                f"f'''{template_string}'''", {"__builtins__": {}}, safe_env
-            )
+                # Create a safe environment containing the data
+                safe_env = {
+                    "line": data,
+                    "line_number": line_number,
+                    "json": json,
+                    "Path": Path,
+                    "str": str,
+                    "escape": escape,
+                }
 
-            # Print the result
-            print(formatted_string)
+                # Use eval to interpret the string as an f-string dynamically
+                formatted_string = eval(
+                    f"f'''{template_string}'''", {"__builtins__": {}}, safe_env
+                )
+
+                # Print the result
+                print(formatted_string)
+
+            except Exception as e:
+                if args.ignore_errors:
+                    print(f"Error on line {line_number}: {e}", file=sys.stderr)
+                    continue
+                else:
+                    raise
 
 
 if __name__ == "__main__":
