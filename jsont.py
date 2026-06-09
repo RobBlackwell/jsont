@@ -8,6 +8,7 @@ import getpass
 import os
 import json
 import sys
+import re
 
 
 def escape(s):
